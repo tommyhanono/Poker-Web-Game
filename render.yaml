@@ -2,6 +2,7 @@ services:
   - type: web
     name: poker-web-game
     runtime: node
+    nodeVersion: "22.16.0"
     region: oregon
     plan: free
     buildCommand: cd server && npm install && cd ../client && npm install && npm run build

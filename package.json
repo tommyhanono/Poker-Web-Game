@@ -1,6 +1,9 @@
 {
   "name": "poker-web-game",
   "version": "1.0.0",
+  "engines": {
+    "node": ">=20.19.0"
+  },
   "scripts": {
     "build": "cd client && npm install && npm run build",
     "start": "node server/index.js",
