@@ -4,11 +4,11 @@ Full-stack multiplayer poker — Texas Hold'em and Pot-Limit Omaha. Create a roo
 
 ![React](https://img.shields.io/badge/React-19-61dafb?style=flat-square&logo=react) ![Node.js](https://img.shields.io/badge/Node.js-22-339933?style=flat-square&logo=node.js) ![Socket.io](https://img.shields.io/badge/Socket.io-4-010101?style=flat-square&logo=socket.io) ![Tailwind](https://img.shields.io/badge/Tailwind-4-38bdf8?style=flat-square&logo=tailwindcss)
 
-## 🚀 Deploy in 1 click
+## 🔗 [Play it → poker-web-game-endgame.onrender.com](https://poker-web-game-endgame.onrender.com)
 
-[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/tommyhanono/Poker-Web-Game)
+No install needed. Works on desktop and tablet.
 
-Connects your GitHub, builds automatically, and gives you a live URL. Free tier.
+> **Note:** Hosted on Render's free tier — the first load after inactivity may take ~30 seconds to wake up.
 
 ---
 
