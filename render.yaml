@@ -4,7 +4,7 @@ services:
     runtime: node
     region: oregon
     plan: free
-    buildCommand: npm install --prefix server && npm install --prefix client --include=dev && npm run build --prefix client
+    buildCommand: npm install && npm install --prefix client --include=dev && npm run build --prefix client
     startCommand: NODE_ENV=production node server/index.js
     envVars:
       - key: NODE_ENV
