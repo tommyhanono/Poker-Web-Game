@@ -2,11 +2,12 @@ services:
   - type: web
     name: poker-web-game
     runtime: node
-    nodeVersion: "22.16.0"
     region: oregon
     plan: free
-    buildCommand: cd server && npm install && cd ../client && npm install && npm run build
+    buildCommand: npm install --prefix server && npm install --prefix client --include=dev && npm run build --prefix client
     startCommand: NODE_ENV=production node server/index.js
     envVars:
       - key: NODE_ENV
         value: production
+      - key: NODE_VERSION
+        value: "22.16.0"

@@ -11,14 +11,15 @@ const isProd = process.env.NODE_ENV === 'production';
 app.use(cors());
 app.use(express.json());
 
+app.get('/health', (_, res) => res.json({ ok: true }));
+
 // Serve built React client in production
 if (isProd) {
   const clientDist = path.join(__dirname, '../client/dist');
   app.use(express.static(clientDist));
-  app.get('*', (req, res) => {
-    if (!req.path.startsWith('/socket.io')) {
-      res.sendFile(path.join(clientDist, 'index.html'));
-    }
+  // Express 5 wildcard — catch remaining routes and serve index.html (SPA fallback)
+  app.get('/{*splat}', (req, res) => {
+    res.sendFile(path.join(clientDist, 'index.html'));
   });
 }
 
@@ -28,8 +29,6 @@ const io = new Server(server, {
 });
 
 setupSocketHandlers(io);
-
-app.get('/health', (_, res) => res.json({ ok: true }));
 
 const PORT = process.env.PORT || 3001;
 server.listen(PORT, () => {
