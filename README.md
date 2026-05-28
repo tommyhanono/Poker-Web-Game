@@ -4,6 +4,12 @@ Full-stack multiplayer poker — Texas Hold'em and Pot-Limit Omaha. Create a roo
 
 ![React](https://img.shields.io/badge/React-19-61dafb?style=flat-square&logo=react) ![Node.js](https://img.shields.io/badge/Node.js-22-339933?style=flat-square&logo=node.js) ![Socket.io](https://img.shields.io/badge/Socket.io-4-010101?style=flat-square&logo=socket.io) ![Tailwind](https://img.shields.io/badge/Tailwind-4-38bdf8?style=flat-square&logo=tailwindcss)
 
+## 🔗 [Play it → poker-web-game.onrender.com](https://poker-web-game.onrender.com)
+
+No install needed. Works on desktop and tablet.
+
+> **Note:** Hosted on Render's free tier — the first load after inactivity may take ~30 seconds to wake up.
+
 ---
 
 ## What it does
