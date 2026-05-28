@@ -8,7 +8,32 @@ Full-stack multiplayer poker — Texas Hold'em and Pot-Limit Omaha. Create a roo
 
 No install needed. Works on desktop and tablet.
 
-> **Note:** Hosted on Render's free tier — the first load after inactivity may take ~30 seconds to wake up.
+---
+
+## ▶️ How to use it
+
+> **⚠️ First load:** The app runs on Render's free tier and sleeps after inactivity. **Wait ~30 seconds** on the first open — it'll load on its own.
+
+### Step-by-step
+
+**1. Host — Create the room**
+- Open the link above
+- Click **Create Room**
+- You'll get a **6-character room code** (e.g. `A3KZ72`) — share this with everyone who's playing
+
+**2. Players — Join the room**
+- Each player opens the same link on their own device
+- Click **Join Room** and enter the 6-character code the host shared
+
+**3. Host — Set up players**
+- Once players are in the waiting room, the host enters each player's **name** and **starting chip amount**
+- Choose game mode: **Texas Hold'em** or **Pot-Limit Omaha**
+- Click **Start Game** when everyone is ready
+
+**4. Play**
+- The host's screen controls the game — players see their own hole cards and use the action buttons (Fold · Check · Call · Raise · All-In) on their turn
+- Blinds rotate automatically each hand
+- At showdown, hands are evaluated and chips are awarded automatically
 
 ---
 
