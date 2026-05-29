@@ -14,32 +14,41 @@ function actionClass(lastAction) {
   return ACTION_CLASS[key] || '';
 }
 
-export default function PlayerSeat({ player, isMe, isActive, isDealer, isSB, isBB }) {
+// compact = mobile opponent cards (smaller)
+export default function PlayerSeat({ player, isMe, isActive, isDealer, isSB, isBB, compact = false }) {
   const cardCount = player.holeCardCount || player.holeCards?.length || 0;
-  // my cards are xl, opponents are sm
-  const cardSize = isMe ? 'xl' : 'sm';
+  // xl for me on desktop, lg for me on mobile, sm/xs for opponents
+  const cardSize = isMe ? 'xl' : (compact ? 'sm' : 'sm');
 
   return (
-    <div className={`player-seat ${isActive ? 'active-turn' : ''} ${player.folded ? 'folded' : ''}`}>
+    <div
+      className={`player-seat ${isActive ? 'active-turn' : ''} ${player.folded ? 'folded' : ''}`}
+      style={compact ? { padding: '0.5rem 0.6rem', minWidth: 72 } : {}}
+    >
       {/* Top row: avatar + name */}
-      <div className="flex items-center gap-2 mb-1.5">
+      <div className="flex items-center gap-1.5 mb-1.5">
         {player.avatar && (
-          <span style={{ fontSize: isMe ? '1.5rem' : '1.2rem', lineHeight: 1 }}>{player.avatar}</span>
+          <span style={{ fontSize: compact ? '1rem' : isMe ? '1.5rem' : '1.2rem', lineHeight: 1, flexShrink: 0 }}>
+            {player.avatar}
+          </span>
         )}
         <div className="flex flex-col min-w-0">
           <div className="flex items-center gap-1 flex-wrap">
-            <span className={`font-bold truncate ${isMe ? 'text-base' : 'text-sm'} max-w-28`}>
+            <span
+              className="font-bold truncate max-w-24"
+              style={{ fontSize: compact ? '0.72rem' : isMe ? '1rem' : '0.88rem' }}
+            >
               {player.name}
             </span>
-            {isMe && <span className="text-xs text-blue-300 font-semibold">(you)</span>}
+            {isMe && !compact && <span className="text-xs text-blue-300 font-semibold">(you)</span>}
             {!player.isConnected && (
-              <span className="text-xs text-gray-500" title="Disconnected">⚡</span>
+              <span style={{ fontSize: '0.65rem', color: '#9ca3af' }} title="Disconnected">⚡</span>
             )}
           </div>
           {/* Chips */}
           <span
             className="font-mono font-bold"
-            style={{ fontSize: isMe ? '0.9rem' : '0.78rem', color: '#ffd54f' }}
+            style={{ fontSize: compact ? '0.68rem' : isMe ? '0.9rem' : '0.78rem', color: '#ffd54f' }}
           >
             💰 {player.chips.toLocaleString()}
           </span>

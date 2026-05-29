@@ -28,6 +28,7 @@ function sanitizeRoomForPlayer(room, playerId, isAdmin) {
       avatar: p.avatar || null,
       holeCards: isMe || isAdmin ? p.holeCards : p.holeCards?.map(() => 'back'),
       holeCardCount: p.holeCards?.length || 0,
+      avatar: p.avatar || null,
     };
   });
 
@@ -168,6 +169,18 @@ function setupSocketHandlers(io) {
       if (name !== undefined) player.name = name;
       if (chips !== undefined) player.chips = chips;
       io.to(currentRoomCode).emit('room_update', sanitizeRoomForPlayer(room, null, false));
+      cb?.({ success: true });
+    });
+
+    socket.on('add_chips', ({ playerId: targetId, amount }, cb) => {
+      const room = rooms.get(currentRoomCode);
+      if (!room || room.hostId !== currentPlayerId) return cb?.({ error: 'Not authorized' });
+      const player = room.players.find(p => p.id === targetId);
+      if (!player) return cb?.({ error: 'Player not found' });
+      const amt = parseInt(amount);
+      if (!amt || amt <= 0) return cb?.({ error: 'Invalid amount' });
+      player.chips += amt;
+      broadcastRoomToAll(io, room);
       cb?.({ success: true });
     });
 
