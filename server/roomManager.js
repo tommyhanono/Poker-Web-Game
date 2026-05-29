@@ -25,6 +25,7 @@ function sanitizeRoomForPlayer(room, playerId, isAdmin) {
       allIn: p.allIn,
       lastAction: p.lastAction,
       isConnected: p.isConnected,
+      avatar: p.avatar || null,
       holeCards: isMe || isAdmin ? p.holeCards : p.holeCards?.map(() => 'back'),
       holeCardCount: p.holeCards?.length || 0,
     };
@@ -68,7 +69,7 @@ function setupSocketHandlers(io) {
     let currentPlayerId = null;
     let isAdmin = false;
 
-    socket.on('create_room', ({ playerName, gameMode }, cb) => {
+    socket.on('create_room', ({ playerName, gameMode, avatar }, cb) => {
       const code = generateRoomCode();
       const playerId = uuidv4();
       const room = {
@@ -87,6 +88,7 @@ function setupSocketHandlers(io) {
           allIn: false,
           lastAction: null,
           isConnected: true,
+          avatar: avatar || null,
         }],
         communityCards: [],
         pot: 0,
@@ -108,7 +110,7 @@ function setupSocketHandlers(io) {
       cb({ success: true, roomCode: code, playerId });
     });
 
-    socket.on('join_room', ({ roomCode, playerName }, cb) => {
+    socket.on('join_room', ({ roomCode, playerName, avatar }, cb) => {
       const room = rooms.get(roomCode?.toUpperCase());
       if (!room) return cb({ error: 'Room not found' });
       if (room.status !== 'lobby') return cb({ error: 'Game already started' });
@@ -126,6 +128,7 @@ function setupSocketHandlers(io) {
         allIn: false,
         lastAction: null,
         isConnected: true,
+        avatar: avatar || null,
       });
 
       currentRoomCode = roomCode.toUpperCase();
@@ -165,6 +168,18 @@ function setupSocketHandlers(io) {
       if (name !== undefined) player.name = name;
       if (chips !== undefined) player.chips = chips;
       io.to(currentRoomCode).emit('room_update', sanitizeRoomForPlayer(room, null, false));
+      cb?.({ success: true });
+    });
+
+    socket.on('add_chips', ({ playerId: targetId, amount }, cb) => {
+      const room = rooms.get(currentRoomCode);
+      if (!room || room.hostId !== currentPlayerId) return cb?.({ error: 'Not authorized' });
+      const player = room.players.find(p => p.id === targetId);
+      if (!player) return cb?.({ error: 'Player not found' });
+      const amt = parseInt(amount);
+      if (!amt || amt <= 0) return cb?.({ error: 'Invalid amount' });
+      player.chips += amt;
+      broadcastRoomToAll(io, room);
       cb?.({ success: true });
     });
 
