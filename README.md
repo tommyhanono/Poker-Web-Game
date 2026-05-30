@@ -6,7 +6,7 @@ Full-stack multiplayer poker — Texas Hold'em and Pot-Limit Omaha. Create a roo
 
 ## 🔗 [Play it → poker-web-game-endgame.onrender.com](https://poker-web-game-endgame.onrender.com)
 
-No install needed. Works on desktop and tablet.
+No install needed. Works on desktop, tablet, and mobile.
 
 ---
 
@@ -41,9 +41,11 @@ No install needed. Works on desktop and tablet.
 
 - Host creates a room and gets a **6-character room code** to share
 - Players join by entering the code — no accounts needed
+- Each player picks an **emoji avatar** when joining (🦁 🐯 🦊 🐺 and more)
 - Host sets each player's name and starting chip stack individually
 - Choose **Texas Hold'em** or **Pot-Limit Omaha** before the game starts
 - Vote mid-session to switch game modes — majority rules, takes effect next hand
+- Host can **add chips** to any player between hands (including themselves)
 - **2–8 players** per room
 
 ---
@@ -55,9 +57,11 @@ No install needed. Works on desktop and tablet.
 | Texas Hold'em | 2 hole cards, standard betting rounds |
 | Pot-Limit Omaha | 4 hole cards, must use exactly 2 + 3 community cards |
 | Actions | Fold · Check · Call · Raise · All-In |
+| Quick bets | ½ Pot · Pot · 2× Pot shortcut buttons |
 | Blinds | Small blind & big blind, rotating each hand |
 | Side pots | Handled automatically for all-in situations |
 | Hand evaluation | Powered by `pokersolver` — full showdown with hand descriptions |
+| Mobile | Fully responsive — opponents row at top, your cards always visible |
 
 ---
 
@@ -67,8 +71,8 @@ Toggle between two visual themes at any time using the button in the top-right c
 
 | Theme | Look |
 |---|---|
-| 🎰 Classic | Green felt table, warm casino lighting |
-| ⚡ Modern | Dark background, neon accents |
+| 🎰 Classic | Green felt table, wood rail, warm casino lighting |
+| ⚡ Modern | Dark background, purple neon accents |
 
 Theme preference is saved in `localStorage`.
 
